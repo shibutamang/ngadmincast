@@ -11,6 +11,16 @@ import { PagesModule } from './views/pages/pages.module';
 import { AuthModule } from './views/pages/auth/auth.module';
 import { LayoutModule } from './views/layout/layout.module';
 import { ScriptLoaderService } from './core/_base/layout/script-loader.service';
+import { CoreModule } from './core/core.module';
+import { HttpClientModule } from '@angular/common/http';
+import { HttpUtilsService } from './core/_base';
+
+// NGRX
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+
+// State
+import { metaReducers, reducers } from './core/reducer';
 
 @NgModule({
   declarations: [
@@ -20,14 +30,20 @@ import { ScriptLoaderService } from './core/_base/layout/script-loader.service';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     MatTableModule,
     MatPaginatorModule,
     MatProgressSpinnerModule,
     LayoutModule,
     PagesModule,
-    AuthModule
+    AuthModule.forRoot(),
+    StoreModule.forRoot(reducers, {metaReducers}),
+		EffectsModule.forRoot([]),
   ],
-  providers: [ScriptLoaderService],
+  providers: [
+    ScriptLoaderService,
+    HttpUtilsService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

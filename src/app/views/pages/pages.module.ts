@@ -4,6 +4,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { RouterModule, Routes } from '@angular/router';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatButtonModule } from '@angular/material/button';
+import { FormsModule } from '@angular/forms';
+import { CoreModule } from 'src/app/core/core.module';
+import { HttpClientModule } from '@angular/common/http';
 
 const routes: Routes = [
 	{
@@ -21,9 +24,12 @@ const routes: Routes = [
   declarations: [DashboardComponent],
   imports: [
     CommonModule,
+    HttpClientModule,
     RouterModule.forChild(routes),
     MatPaginatorModule,
-    MatButtonModule
+    MatButtonModule,
+    FormsModule,
+		CoreModule,
   ]
 })
 export class PagesModule { }
